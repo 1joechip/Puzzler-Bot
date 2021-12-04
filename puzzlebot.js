@@ -10,8 +10,8 @@ const config = require("./config");
 let Parser = require('rss-parser');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
-const SUB = "banano"
-const announcementChannelID = "916442623265374298"
+const SUB = "banano";
+const announcementChannelID = "916442623265374298";
 const SUB_URL = 'https://www.reddit.com/r/' + SUB + '/new.rss';
 const TOKEN = config.token;
 const PUZZLE_ADMINS = config.admins;
@@ -26,7 +26,7 @@ let announcementChannel;
 client.once("ready", () => {
 	console.log("Ready!");
 	client.user.setActivity("for puzzles...", { type: "WATCHING" });
-        
+
         // ID of my channel
         announcementChannel = client.channels.cache.get(announcementChannelID);
         startPolling();
@@ -53,7 +53,7 @@ client.on("messageCreate", async message => {
                 } else {
                         let user = params[1];
                         await unWatch(user.toLowerCase());
-                        await message.reply("No longer watching for posts from u/" + user)
+                        await message.reply("No longer watching for posts from u/" + user);
                 }
         }
 });
@@ -65,7 +65,7 @@ async function getFeed() {
 
 function getWatching() {
         let embed = new MessageEmbed().setColor('#0099ff');
-        embed.setTitle("Users I am watching for posts from")
+        embed.setTitle("Users I am watching for posts from");
         if (watching.length) {
                 fields = [];
                 for (const watcher of watching) {
@@ -165,7 +165,7 @@ async function alertPost(post) {
         .setURL(post.link)
         .addField('Content preview', content)
         .setTimestamp()
-        .setFooter("Click the title to be taken to the post. Good luck!")
+        .setFooter("Click the title to be taken to the post. Good luck!");
         let message = await announcementChannel.send({ embeds: [embed] });
         let ping = await announcementChannel.send("<@&916447522824794125>");
         ping.delete();
